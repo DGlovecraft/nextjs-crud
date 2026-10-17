@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Student CRUD (Next.js + Prisma + SQLite)
 
-## Getting Started
+ระบบจัดการข้อมูลนักศึกษาตามบทเรียน [NextJS CRUD](https://it-nkc.github.io/nextjs-crud/) มีรายการนักศึกษา เพิ่ม แก้ไข และลบข้อมูล
 
-First, run the development server:
+## ความต้องการ
+
+- Node.js 20.19 ขึ้นไป
+- npm
+
+## ติดตั้งและเริ่มใช้งาน
+
+เปิด Terminal ในโฟลเดอร์ `my-app` แล้วติดตั้ง dependencies:
+
+```bash
+npm install
+```
+
+สร้างไฟล์ตั้งค่าฐานข้อมูลจากตัวอย่าง:
+
+```bash
+cp .env.example .env
+```
+
+บน Windows PowerShell ใช้:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+สร้างฐานข้อมูล SQLite และ Prisma Client:
+
+```bash
+npx prisma migrate dev --name init
+npx prisma generate
+```
+
+เริ่มเซิร์ฟเวอร์:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+เปิด [http://localhost:3000](http://localhost:3000) ระบบจะไปยัง `/students`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## วิธีใช้งาน
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- ดูรายชื่อนักศึกษาที่ `/students`
+- เลือก **เพิ่มนักศึกษา** เพื่อสร้างรายการใหม่
+- เลือก **แก้ไข** เพื่อปรับข้อมูลนักศึกษา
+- เลือก **ลบ** และยืนยันเพื่อลบรายการ
 
-## Learn More
+ข้อมูลนักศึกษาประกอบด้วยรหัสนักศึกษา ชื่อ อีเมล (ไม่บังคับ) สาขา ชั้นปี และสถานะ
 
-To learn more about Next.js, take a look at the following resources:
+## ตรวจสอบโปรเจกต์
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run lint
+npm run build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ส่งขึ้น GitHub
 
-## Deploy on Vercel
+โปรเจกต์นี้เป็น repository แยกอยู่ในโฟลเดอร์ `my-app` สร้าง repository เปล่าบน GitHub แล้วตั้ง remote ของตัวเอง (แทน `YOUR-USERNAME`):
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+git remote add origin https://github.com/YOUR-USERNAME/nextjs-crud.git
+git add .
+git commit -m "Complete Next.js student CRUD"
+git push -u origin HEAD
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ไฟล์ `.env` และฐานข้อมูล SQLite ถูกละเว้นจาก Git อย่าอัปโหลด secret หรือข้อมูลส่วนตัวขึ้น repository
